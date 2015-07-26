@@ -47,3 +47,35 @@ Each of the applications is now active which can be verified with the browser:
 8. Click on **Add**
 9. Click on **Dashboards**
 10. Click on **Home** -> **Import** -> **Browse** and select the file [docker-monitoring.json](https://github.com/pbelmann/docker-monitoring/blob/master/docker-monitoring.json) which you have downloaded with the repository in the Installation step. You should now see four panels.
+
+### Visualisations
+
+##### Network Traffic RX
+  * Y-Axis: Received Packages in bytes per second
+  * X-Axis: Time
+ 
+##### Network Traffic TX
+  * Y-Axis: Transmitted packages in bytes per second
+  * X-Axis: Time
+
+##### Memory Usage
+  *  Y-Axis: Total memory usage
+  *  X-Axis: Time 
+
+##### Memory Working Set
+  *  Y-Axis: Total memory usage minus pages in inactive LRUs
+  *  X-Axis: Time
+
+##### Filesystem
+  * Y-Axis: Filesystem Usage in MB or GB
+  * X-Axis: Time
+
+##### CPU Usage: 
+  * Y-Axis: Derivivation of Cumulative CPU usage of a time span.
+  * X-Axis: Time 
+
+In order to get the output formatted in "number of cores" like in cadvisor, the value must be: `derivate(cpu_cumulative_usage) /1000000000/number of cores`
+Unfortunately there are multiple issues in cadvisor and grafana that make this impossible at the moment. https://github.com/google/cadvisor/issues/499
+https://github.com/google/cadvisor/issues/740
+ 
+  
