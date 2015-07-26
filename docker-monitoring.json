@@ -38,16 +38,16 @@
           "interval": "",
           "leftYAxisLabel": "",
           "legend": {
+            "alignAsTable": true,
             "avg": true,
             "current": true,
             "max": true,
             "min": false,
             "show": true,
-            "total": false,
-            "values": true,
-            "alignAsTable": true,
+            "sort": "max",
             "sortDesc": false,
-            "sort": "max"
+            "total": false,
+            "values": true
           },
           "lines": true,
           "linewidth": 2,
@@ -57,6 +57,7 @@
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
+          "rightYAxisLabel": "",
           "seriesOverrides": [],
           "span": 12,
           "stack": false,
@@ -67,10 +68,10 @@
               "column": "cpu_cumulative_usage",
               "function": "derivative",
               "groupby_field": "container_name",
-              "query": "select container_name, derivative(cpu_cumulative_usage) from \"stats\" where $timeFilter group by time($interval), container_name order asc",
-              "series": "stats",
               "interval": "2s",
-              "rawQuery": true
+              "query": "select container_name, derivative(cpu_cumulative_usage) from \"stats\" where $timeFilter group by time($interval), container_name order asc",
+              "rawQuery": true,
+              "series": "stats"
             }
           ],
           "timeFrom": null,
@@ -86,8 +87,7 @@
           "y_formats": [
             "none",
             "short"
-          ],
-          "rightYAxisLabel": ""
+          ]
         },
         {
           "aliasColors": {},
@@ -113,16 +113,16 @@
           "interval": "",
           "leftYAxisLabel": "",
           "legend": {
+            "alignAsTable": true,
             "avg": true,
             "current": true,
             "max": true,
             "min": false,
             "show": true,
-            "total": false,
-            "values": true,
-            "alignAsTable": true,
+            "sort": "max",
             "sortDesc": false,
-            "sort": "max"
+            "total": false,
+            "values": true
           },
           "lines": true,
           "linewidth": 2,
@@ -132,6 +132,7 @@
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
+          "rightYAxisLabel": "",
           "seriesOverrides": [],
           "span": 12,
           "stack": false,
@@ -142,10 +143,10 @@
               "column": "rx_bytes",
               "function": "stddev",
               "groupby_field": "container_name",
-              "query": "select container_name, last(rx_bytes) from \"stats\" where $timeFilter group by time($interval), container_name order asc",
-              "series": "stats",
               "interval": "2s",
-              "rawQuery": true
+              "query": "select container_name, last(rx_bytes) from \"stats\" where $timeFilter group by time($interval), container_name order asc",
+              "rawQuery": true,
+              "series": "stats"
             }
           ],
           "timeFrom": null,
@@ -161,8 +162,7 @@
           "y_formats": [
             "Bps",
             "Bps"
-          ],
-          "rightYAxisLabel": ""
+          ]
         },
         {
           "aliasColors": {},
@@ -188,16 +188,16 @@
           "interval": "",
           "leftYAxisLabel": "",
           "legend": {
+            "alignAsTable": true,
             "avg": true,
             "current": true,
             "max": true,
             "min": false,
             "show": true,
-            "total": false,
-            "values": true,
-            "alignAsTable": true,
+            "sort": "max",
             "sortDesc": false,
-            "sort": "max"
+            "total": false,
+            "values": true
           },
           "lines": true,
           "linewidth": 2,
@@ -207,6 +207,7 @@
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
+          "rightYAxisLabel": "",
           "seriesOverrides": [],
           "span": 12,
           "stack": false,
@@ -217,10 +218,10 @@
               "column": "rx_bytes",
               "function": "stddev",
               "groupby_field": "container_name",
-              "query": "select container_name, last(tx_bytes) from \"stats\" where $timeFilter group by time($interval), container_name order asc",
-              "series": "stats",
               "interval": "2s",
-              "rawQuery": true
+              "query": "select container_name, last(tx_bytes) from \"stats\" where $timeFilter group by time($interval), container_name order asc",
+              "rawQuery": true,
+              "series": "stats"
             }
           ],
           "timeFrom": null,
@@ -236,8 +237,7 @@
           "y_formats": [
             "Bps",
             "Bps"
-          ],
-          "rightYAxisLabel": ""
+          ]
         }
       ],
       "title": "Row"
@@ -269,14 +269,14 @@
           },
           "id": 5,
           "legend": {
+            "alignAsTable": true,
             "avg": true,
             "current": true,
             "max": true,
             "min": false,
             "show": true,
             "total": false,
-            "values": true,
-            "alignAsTable": true
+            "values": true
           },
           "lines": true,
           "linewidth": 2,
@@ -298,8 +298,9 @@
               "function": "max",
               "groupby_field": "container_name",
               "interval": "30s",
-              "query": "select container_name, max(memory_usage) from \"stats\" where $timeFilter group by time($interval), container_name order asc",
-              "series": "stats"
+              "query": "select container_name, memory_usage from \"stats\" where $timeFilter group by time($interval), container_name order asc",
+              "series": "stats",
+              "rawQuery": true
             }
           ],
           "timeFrom": null,
@@ -348,10 +349,10 @@
             "min": false,
             "rightSide": false,
             "show": true,
-            "total": false,
-            "values": true,
+            "sort": "current",
             "sortDesc": false,
-            "sort": "current"
+            "total": false,
+            "values": true
           },
           "lines": true,
           "linewidth": 2,
@@ -373,8 +374,9 @@
               "function": "max",
               "groupby_field": "container_name",
               "interval": "30s",
-              "query": "select container_name, max(memory_working_set) from \"stats\" where $timeFilter group by time($interval), container_name order asc",
-              "series": "stats"
+              "query": "select container_name, memory_working_set from \"stats\" where $timeFilter group by time($interval), container_name order asc",
+              "series": "stats",
+              "rawQuery": true
             }
           ],
           "timeFrom": null,
@@ -447,8 +449,9 @@
               "function": "max",
               "groupby_field": "container_name",
               "interval": "30s",
-              "query": "select container_name, max(fs_usage) from \"stats\" where $timeFilter group by time($interval), container_name order asc",
-              "series": "stats"
+              "query": "select container_name, fs_usage from \"stats\" where $timeFilter group by time($interval), container_name order asc",
+              "series": "stats",
+              "rawQuery": true
             }
           ],
           "timeFrom": null,
@@ -506,8 +509,8 @@
   ],
   "time": {
     "from": "now-5m",
-    "to": "now",
-    "now": true
+    "now": true,
+    "to": "now"
   },
   "templating": {
     "list": []
@@ -517,5 +520,5 @@
   },
   "refresh": false,
   "schemaVersion": 6,
-  "version": 8
+  "version": 9
 }
