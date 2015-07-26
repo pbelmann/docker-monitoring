@@ -77,5 +77,10 @@ Each of the applications is now active which can be verified with the browser:
 In order to get the output formatted in "number of cores" like in cadvisor, the value must be: `derivate(cpu_cumulative_usage) /1000000000/number of cores`
 Unfortunately there are multiple issues in cadvisor and grafana that make this impossible at the moment. https://github.com/google/cadvisor/issues/499
 https://github.com/google/cadvisor/issues/740
- 
+
+### Export and Import:
+  * InfluxDB:
+     * Export: `curl "http://localhost:8086/db/cadvisor/series?u=root&p=root&q=select%20*%20from%20stats%3B" > stats.json`
+  
+
   
