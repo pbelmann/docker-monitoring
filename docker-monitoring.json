@@ -15,82 +15,6 @@
       "height": "250px",
       "panels": [
         {
-          "aliasColors": {
-            "FS Limit": "#F9934E",
-            "FS Usage": "#E0F9D7"
-          },
-          "bars": false,
-          "datasource": null,
-          "editable": true,
-          "error": false,
-          "fill": 1,
-          "grid": {
-            "leftLogBase": 1,
-            "leftMax": null,
-            "leftMin": null,
-            "rightLogBase": 1,
-            "rightMax": null,
-            "rightMin": null,
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "id": 4,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "alias": "FS Limit",
-              "column": "fs_limit",
-              "function": "mean",
-              "query": "select mean(fs_limit) from \"stats\" where $timeFilter group by time($interval) order asc",
-              "series": "stats"
-            },
-            {
-              "alias": "FS Usage",
-              "column": "fs_usage",
-              "function": "mean",
-              "query": "select mean(fs_usage) from \"stats\" where $timeFilter group by time($interval) order asc",
-              "series": "stats",
-              "target": ""
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Filesystem Limit / Usage",
-          "tooltip": {
-            "shared": true,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "x-axis": true,
-          "y-axis": true,
-          "y_formats": [
-            "bits",
-            "short"
-          ]
-        },
-        {
           "aliasColors": {},
           "bars": false,
           "datasource": "influxdb",
@@ -112,15 +36,18 @@
           },
           "id": 1,
           "interval": "",
-          "leftYAxisLabel": "Mhz",
+          "leftYAxisLabel": "",
           "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
+            "avg": true,
+            "current": true,
+            "max": true,
             "min": false,
             "show": true,
             "total": false,
-            "values": false
+            "values": true,
+            "alignAsTable": true,
+            "sortDesc": false,
+            "sort": "max"
           },
           "lines": true,
           "linewidth": 2,
@@ -131,17 +58,19 @@
           "points": false,
           "renderer": "flot",
           "seriesOverrides": [],
-          "span": 6,
+          "span": 12,
           "stack": false,
           "steppedLine": true,
           "targets": [
             {
               "alias": "",
               "column": "cpu_cumulative_usage",
-              "function": "median",
+              "function": "derivative",
               "groupby_field": "container_name",
-              "query": "select container_name, median(cpu_cumulative_usage) from \"stats\" where $timeFilter group by time($interval), container_name order asc",
-              "series": "stats"
+              "query": "select container_name, derivative(cpu_cumulative_usage) from \"stats\" where $timeFilter group by time($interval), container_name order asc",
+              "series": "stats",
+              "interval": "2s",
+              "rawQuery": true
             }
           ],
           "timeFrom": null,
@@ -155,9 +84,160 @@
           "x-axis": true,
           "y-axis": true,
           "y_formats": [
-            "bps",
+            "none",
             "short"
-          ]
+          ],
+          "rightYAxisLabel": ""
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "influxdb",
+          "decimals": null,
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": null,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 8,
+          "interval": "",
+          "leftYAxisLabel": "",
+          "legend": {
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": true,
+            "alignAsTable": true,
+            "sortDesc": false,
+            "sort": "max"
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 12,
+          "stack": false,
+          "steppedLine": true,
+          "targets": [
+            {
+              "alias": "",
+              "column": "rx_bytes",
+              "function": "stddev",
+              "groupby_field": "container_name",
+              "query": "select container_name, last(rx_bytes) from \"stats\" where $timeFilter group by time($interval), container_name order asc",
+              "series": "stats",
+              "interval": "2s",
+              "rawQuery": true
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Network Traffic (RX)",
+          "tooltip": {
+            "shared": true,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "x-axis": true,
+          "y-axis": true,
+          "y_formats": [
+            "Bps",
+            "Bps"
+          ],
+          "rightYAxisLabel": ""
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "influxdb",
+          "decimals": null,
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": null,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "id": 9,
+          "interval": "",
+          "leftYAxisLabel": "",
+          "legend": {
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": true,
+            "alignAsTable": true,
+            "sortDesc": false,
+            "sort": "max"
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 12,
+          "stack": false,
+          "steppedLine": true,
+          "targets": [
+            {
+              "alias": "",
+              "column": "rx_bytes",
+              "function": "stddev",
+              "groupby_field": "container_name",
+              "query": "select container_name, last(tx_bytes) from \"stats\" where $timeFilter group by time($interval), container_name order asc",
+              "series": "stats",
+              "interval": "2s",
+              "rawQuery": true
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Network Traffic (TX)",
+          "tooltip": {
+            "shared": true,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "x-axis": true,
+          "y-axis": true,
+          "y_formats": [
+            "Bps",
+            "Bps"
+          ],
+          "rightYAxisLabel": ""
         }
       ],
       "title": "Row"
@@ -187,15 +267,16 @@
             "threshold2": null,
             "threshold2Color": "rgba(234, 112, 112, 0.22)"
           },
-          "id": 2,
+          "id": 5,
           "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
+            "avg": true,
+            "current": true,
+            "max": true,
             "min": false,
             "show": true,
             "total": false,
-            "values": false
+            "values": true,
+            "alignAsTable": true
           },
           "lines": true,
           "linewidth": 2,
@@ -207,16 +288,17 @@
           "renderer": "flot",
           "rightYAxisLabel": "",
           "seriesOverrides": [],
-          "span": 6,
+          "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
               "alias": "",
               "column": "memory_usage",
-              "function": "mean",
+              "function": "max",
               "groupby_field": "container_name",
-              "query": "select container_name, mean(memory_usage) from \"stats\" where $timeFilter group by time($interval), container_name order asc",
+              "interval": "30s",
+              "query": "select container_name, max(memory_usage) from \"stats\" where $timeFilter group by time($interval), container_name order asc",
               "series": "stats"
             }
           ],
@@ -236,11 +318,86 @@
           ]
         },
         {
-          "aliasColors": {
-            "TX": "#890F02"
-          },
+          "aliasColors": {},
           "bars": false,
           "datasource": null,
+          "decimals": null,
+          "editable": true,
+          "error": false,
+          "fill": 1,
+          "grid": {
+            "leftLogBase": 1,
+            "leftMax": null,
+            "leftMin": null,
+            "rightLogBase": 1,
+            "rightMax": null,
+            "rightMin": null,
+            "threshold1": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2": null,
+            "threshold2Color": "rgba(234, 112, 112, 0.22)",
+            "thresholdLine": false
+          },
+          "id": 6,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideEmpty": false,
+            "max": true,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "total": false,
+            "values": true,
+            "sortDesc": false,
+            "sort": "current"
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "connected",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "rightYAxisLabel": "",
+          "seriesOverrides": [],
+          "span": 12,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "alias": "",
+              "column": "memory_working_set",
+              "function": "max",
+              "groupby_field": "container_name",
+              "interval": "30s",
+              "query": "select container_name, max(memory_working_set) from \"stats\" where $timeFilter group by time($interval), container_name order asc",
+              "series": "stats"
+            }
+          ],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Memory Working Set",
+          "tooltip": {
+            "shared": true,
+            "value_type": "cumulative"
+          },
+          "transparent": false,
+          "type": "graph",
+          "x-axis": true,
+          "y-axis": true,
+          "y_formats": [
+            "bytes",
+            "short"
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": null,
+          "decimals": null,
           "editable": true,
           "error": false,
           "fill": 1,
@@ -256,15 +413,19 @@
             "threshold2": null,
             "threshold2Color": "rgba(234, 112, 112, 0.22)"
           },
-          "id": 3,
+          "height": "",
+          "id": 7,
           "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideEmpty": false,
+            "max": true,
             "min": false,
+            "rightSide": false,
             "show": true,
             "total": false,
-            "values": false
+            "values": true
           },
           "lines": true,
           "linewidth": 2,
@@ -274,40 +435,36 @@
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
+          "rightYAxisLabel": "",
           "seriesOverrides": [],
-          "span": 6,
+          "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "alias": "TX",
-              "column": "tx_bytes",
-              "function": "last",
-              "query": "select last(tx_bytes) from \"stats\" where $timeFilter group by time($interval) order asc",
+              "alias": "",
+              "column": "fs_usage",
+              "function": "max",
+              "groupby_field": "container_name",
+              "interval": "30s",
+              "query": "select container_name, max(fs_usage) from \"stats\" where $timeFilter group by time($interval), container_name order asc",
               "series": "stats"
-            },
-            {
-              "alias": "RX",
-              "column": "rx_bytes",
-              "function": "last",
-              "query": "select last(rx_bytes) from \"stats\" where $timeFilter group by time($interval) order asc",
-              "series": "stats",
-              "target": ""
             }
           ],
           "timeFrom": null,
           "timeShift": null,
-          "title": "Network Traffic",
+          "title": "Filesystem",
           "tooltip": {
             "shared": true,
             "value_type": "cumulative"
           },
+          "transparent": false,
           "type": "graph",
           "x-axis": true,
           "y-axis": true,
           "y_formats": [
-            "Bps",
-            "Bps"
+            "bytes",
+            "short"
           ]
         }
       ],
@@ -348,8 +505,9 @@
     }
   ],
   "time": {
-    "from": "now-6h",
-    "to": "now"
+    "from": "now-5m",
+    "to": "now",
+    "now": true
   },
   "templating": {
     "list": []
@@ -359,5 +517,5 @@
   },
   "refresh": false,
   "schemaVersion": 6,
-  "version": 12
+  "version": 8
 }
