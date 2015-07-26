@@ -24,3 +24,23 @@ Each of the applications is active now which can be verified with the browser:
 * cadvisor: http://localhost:8080
 * influxdb: http://localhost:8083
 * grafana: http://localhost:3000
+
+### Configuration
+
+1. Open grafana in your browser: `http://0.0.0.0:3000`.
+2. Login with username: `admin` and password `admin`. 
+3. Click on the Grafana icon (The Fireball icon upper left corner)
+4. Click on **Data Sources**
+5. Click on **Add New** (upper panel)
+7. Fill in the following information:
+   * Name: influxdb
+   * Default: yes
+   * Type:  InfluxDb 0.8.x
+   * Url: http://influxsrv:8086
+   * Basic Auth: 
+      * Enable: yes
+      * User: admin
+      * Password: admin
+   * Database cadvisor
+   * User: root
+   * Password: root
