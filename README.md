@@ -44,3 +44,6 @@ Each of the applications is active now which can be verified with the browser:
    * Database cadvisor
    * User: root
    * Password: root
+8. Click on **Add**
+9. Click on **Dashboards**
+10. Click on **Home** -> **Import** -> **Browse** and select the file [docker-monitoring.json](https://github.com/pbelmann/docker-monitoring/blob/master/docker-monitoring.json) which you have downloaded with the repository in the Installation step. You should now see four panels.
