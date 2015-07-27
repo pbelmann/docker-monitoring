@@ -81,6 +81,9 @@ https://github.com/google/cadvisor/issues/740
 ### Export and Import:
   * InfluxDB:
      * Export: `curl "http://localhost:8086/db/cadvisor/series?u=root&p=root&q=select%20*%20from%20stats%3B" > stats.json`
-  
-
-  
+     * Import: `curl -XPOST -d @stats.json "http://hostb:8086/db/dbname/series?u=root&p=root"`
+  * Grafana
+     * Export:
+        1. Click on panel title
+        2. Click on stacked bars (left)
+        3. Click on export CSV
