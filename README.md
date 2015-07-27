@@ -63,7 +63,7 @@ Each of the applications is now active which can be verified with the browser:
   * X-Axis: Time
 
 ##### CPU Usage: 
-  * Y-Axis: Derivivation of Cumulative CPU usage of a time span.
+  * Y-Axis: Derivation of cumulative CPU usage of a time span.
   * X-Axis: Time 
 
 In order to get the output formatted in "number of cores" like in cadvisor, the value must be: `derivate(cpu_cumulative_usage) /1000000000/number of cores`
@@ -76,6 +76,6 @@ https://github.com/google/cadvisor/issues/740
      * Import: `curl -XPOST -d @stats.json "http://hostb:8086/db/dbname/series?u=root&p=root"`
   * Grafana
      * Export:
-        1. Click on panel title
-        2. Click on stacked bars (left)
-        3. Click on export CSV
+        1. Click on panel title.
+        2. Click on stacked bars (left).
+        3. Click on export CSV.
