@@ -50,14 +50,6 @@ Each of the applications is now active which can be verified with the browser:
 
 ### Visualisations
 
-##### Network Traffic RX
-  * Y-Axis: Received Packages in bytes per second
-  * X-Axis: Time
- 
-##### Network Traffic TX
-  * Y-Axis: Transmitted packages in bytes per second
-  * X-Axis: Time
-
 ##### Memory Usage
   *  Y-Axis: Total memory usage
   *  X-Axis: Time 

@@ -88,156 +88,6 @@
             "none",
             "short"
           ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "influxdb",
-          "decimals": null,
-          "editable": true,
-          "error": false,
-          "fill": 1,
-          "grid": {
-            "leftLogBase": 1,
-            "leftMax": null,
-            "leftMin": null,
-            "rightLogBase": 1,
-            "rightMax": null,
-            "rightMin": null,
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "id": 8,
-          "interval": "",
-          "leftYAxisLabel": "",
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": true,
-            "max": true,
-            "min": false,
-            "show": true,
-            "sort": "max",
-            "sortDesc": false,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "rightYAxisLabel": "",
-          "seriesOverrides": [],
-          "span": 12,
-          "stack": false,
-          "steppedLine": true,
-          "targets": [
-            {
-              "alias": "",
-              "column": "rx_bytes",
-              "function": "stddev",
-              "groupby_field": "container_name",
-              "interval": "2s",
-              "query": "select container_name, last(rx_bytes) from \"stats\" where $timeFilter group by time($interval), container_name order asc",
-              "rawQuery": true,
-              "series": "stats"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Network Traffic (RX)",
-          "tooltip": {
-            "shared": true,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "x-axis": true,
-          "y-axis": true,
-          "y_formats": [
-            "Bps",
-            "Bps"
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "influxdb",
-          "decimals": null,
-          "editable": true,
-          "error": false,
-          "fill": 1,
-          "grid": {
-            "leftLogBase": 1,
-            "leftMax": null,
-            "leftMin": null,
-            "rightLogBase": 1,
-            "rightMax": null,
-            "rightMin": null,
-            "threshold1": null,
-            "threshold1Color": "rgba(216, 200, 27, 0.27)",
-            "threshold2": null,
-            "threshold2Color": "rgba(234, 112, 112, 0.22)"
-          },
-          "id": 9,
-          "interval": "",
-          "leftYAxisLabel": "",
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": true,
-            "max": true,
-            "min": false,
-            "show": true,
-            "sort": "max",
-            "sortDesc": false,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "rightYAxisLabel": "",
-          "seriesOverrides": [],
-          "span": 12,
-          "stack": false,
-          "steppedLine": true,
-          "targets": [
-            {
-              "alias": "",
-              "column": "rx_bytes",
-              "function": "stddev",
-              "groupby_field": "container_name",
-              "interval": "2s",
-              "query": "select container_name, last(tx_bytes) from \"stats\" where $timeFilter group by time($interval), container_name order asc",
-              "rawQuery": true,
-              "series": "stats"
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Network Traffic (TX)",
-          "tooltip": {
-            "shared": true,
-            "value_type": "cumulative"
-          },
-          "type": "graph",
-          "x-axis": true,
-          "y-axis": true,
-          "y_formats": [
-            "Bps",
-            "Bps"
-          ]
         }
       ],
       "title": "Row"
@@ -298,9 +148,8 @@
               "function": "max",
               "groupby_field": "container_name",
               "interval": "30s",
-              "query": "select container_name, memory_usage from \"stats\" where $timeFilter group by time($interval), container_name order asc",
-              "series": "stats",
-              "rawQuery": true
+              "query": "select container_name, max(memory_usage) from \"stats\" where $timeFilter group by time($interval), container_name order asc",
+              "series": "stats"
             }
           ],
           "timeFrom": null,
@@ -374,9 +223,8 @@
               "function": "max",
               "groupby_field": "container_name",
               "interval": "30s",
-              "query": "select container_name, memory_working_set from \"stats\" where $timeFilter group by time($interval), container_name order asc",
-              "series": "stats",
-              "rawQuery": true
+              "query": "select container_name, max(memory_working_set) from \"stats\" where $timeFilter group by time($interval), container_name order asc",
+              "series": "stats"
             }
           ],
           "timeFrom": null,
@@ -449,9 +297,8 @@
               "function": "max",
               "groupby_field": "container_name",
               "interval": "30s",
-              "query": "select container_name, fs_usage from \"stats\" where $timeFilter group by time($interval), container_name order asc",
-              "series": "stats",
-              "rawQuery": true
+              "query": "select container_name, max(fs_usage) from \"stats\" where $timeFilter group by time($interval), container_name order asc",
+              "series": "stats"
             }
           ],
           "timeFrom": null,
@@ -520,5 +367,5 @@
   },
   "refresh": false,
   "schemaVersion": 6,
-  "version": 9
+  "version": 0
 }
